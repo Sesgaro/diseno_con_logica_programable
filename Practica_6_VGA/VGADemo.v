@@ -1,0 +1,43 @@
+module VGADemo (
+	input MAX10_CLK1_50,
+	output reg [2:0] pixel, //0-PIN_AA1, 1-PIN_W1, 2-PIN_P1
+	output hsync_out, //PIN_N3
+	output vsync_out //PIN_N1
+);
+
+wire inDisplayArea;
+wire [9:0] CounterX;
+wire [9:0] CounterY;
+
+reg pixel_tick = 0;
+
+//es para crear una señal a la mitad de la velocidad del clock, es decir
+// a 25MHz
+
+always @(posedge MAX10_CLK1_50)
+	pixel_tick <= ~pixel_tick;
+	
+	
+hvsync_generator hvsync(
+	.clk(MAX10_CLK1_50),
+	.pixel_tick(pixel_tick),
+	.vga_h_sync(hsync_out),
+	.vga_v_sync(vsync_out),
+	.CounterX(CounterX),
+	.CounterY(CounterY),
+	.inDisplayArea(inDisplayArea)
+	);
+	
+	always @(posedge MAX10_CLK1_50)
+	begin
+		if (inDisplayArea)
+		//
+			if (CounterX[6] ^ CounterY[6])
+				pixel <= 3'b111; 
+			else
+				pixel <= 3'b000; 
+		else
+			pixel <= 3'b000;
+	end
+	
+endmodule
