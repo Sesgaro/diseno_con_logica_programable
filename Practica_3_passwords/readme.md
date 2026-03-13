@@ -5,7 +5,6 @@ Un sistema de validación de contraseñas de 4 dígitos implementado totalmente 
 
 ## Funcionalidad
 - **Validación por Estados:** Implementación de una Máquina de Estados de Moore para la secuencia de entrada.
-- **Interfaz Visual:** Salida a 4 displays de 7 segmentos con codificación Hexadecimal-a-7Seg personalizada.
 - **Seguridad:** Bloqueo de sistema y reinicio por hardware mediante `rst`.
 
 ## Verificación (Testbench)
