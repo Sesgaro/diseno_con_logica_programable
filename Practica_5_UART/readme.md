@@ -1,6 +1,6 @@
 
 
-# Contador Plus
+# UART
 
 Este modulo permite enviar datos a otra placa por medio del protocolo serail UART cuando el usuario presiona el boton `start`.
 
